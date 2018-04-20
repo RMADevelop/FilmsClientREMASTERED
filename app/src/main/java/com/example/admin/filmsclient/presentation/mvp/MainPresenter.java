@@ -1,7 +1,5 @@
 package com.example.admin.filmsclient.presentation.mvp;
 
-import android.util.Log;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.example.admin.filmsclient.presentation.Screens;
 import com.example.admin.filmsclient.presentation.mvp.core.BasePresenter;
@@ -23,7 +21,10 @@ public class MainPresenter extends BasePresenter<MainView> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        Log.d("sdfsdfffs", "onFirstViewAttach: ");
         router.navigateTo(Screens.PREMIERS);
+    }
+
+    public void openFilmDetail(int id) {
+        router.navigateTo(Screens.FILM_DETAIL, id);
     }
 }

@@ -6,5 +6,5 @@ import io.reactivex.Single;
 
 public interface PremiersRepository {
 
-    Single<Movie> getMovie();
+    Single<Movie> getMovie(int page);
 }

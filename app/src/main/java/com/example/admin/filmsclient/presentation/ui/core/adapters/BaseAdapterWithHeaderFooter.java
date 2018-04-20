@@ -16,11 +16,12 @@ public abstract class BaseAdapterWithHeaderFooter<T, VH extends BaseViewHolder> 
     private final static int VIEW_TYPE_ITEM = 0;
     private final static int VIEW_TYPE_HEADER = 1;
     private final static int VIEW_TYPE_FOOTER = 2;
-
     protected LayoutInflater inflater;
     protected List<T> list = new ArrayList<>();
+    private Context context;
 
     public BaseAdapterWithHeaderFooter(Context context) {
+        this.context = context;
         inflater = LayoutInflater.from(context);
     }
 
@@ -61,7 +62,7 @@ public abstract class BaseAdapterWithHeaderFooter<T, VH extends BaseViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
         T item = isItemPosition(position) ? list.get(position - getHeadersCount()) : null;
-        holder.bind(item, position);
+        holder.bind(context, item, position);
     }
 
     private boolean isItemPosition(int position) {
@@ -75,6 +76,11 @@ public abstract class BaseAdapterWithHeaderFooter<T, VH extends BaseViewHolder> 
 
     public void setItems(List<T> list) {
         this.list = list != null ? list : Collections.emptyList();
+        notifyDataSetChanged();
+    }
+
+    public void addItems(List<T> list) {
+        this.list.addAll(list);
         notifyDataSetChanged();
     }
 

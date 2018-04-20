@@ -1,5 +1,8 @@
 package com.example.admin.filmsclient.domain.premiers;
 
+import android.util.Log;
+
+import com.example.admin.filmsclient.domain.PaginationState;
 import com.example.admin.filmsclient.domain.core.pojo.Movie;
 
 import javax.inject.Inject;
@@ -11,14 +14,18 @@ import io.reactivex.schedulers.Schedulers;
 public class PremiersInteractor {
 
     private final PremiersRepository premiersRepository;
+    private final PaginationState paginationState;
 
     @Inject
-    public PremiersInteractor(PremiersRepository premiersRepository) {
+    public PremiersInteractor(PremiersRepository premiersRepository, PaginationState paginationState) {
         this.premiersRepository = premiersRepository;
+        this.paginationState = paginationState;
     }
 
     public Single<Movie> getMovie() {
-        return premiersRepository.getMovie()
+        return premiersRepository.getMovie(paginationState.getPage())
+                .doOnSuccess(movie -> paginationState.nextPage())
+                .doOnSuccess(movie -> Log.d("Sdfsdfsdf", "accept: " + movie.getPage() + paginationState.getPage()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

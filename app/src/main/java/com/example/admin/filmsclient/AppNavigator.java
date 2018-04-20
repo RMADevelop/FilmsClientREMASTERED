@@ -2,11 +2,13 @@ package com.example.admin.filmsclient;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.example.admin.filmsclient.presentation.Screens;
+import com.example.admin.filmsclient.presentation.ui.filmdetail.FilmDetailFragment;
 import com.example.admin.filmsclient.presentation.ui.premiers.PremiersFragment;
 
 import ru.terrakok.cicerone.android.SupportAppNavigator;
@@ -29,10 +31,18 @@ public class AppNavigator extends SupportAppNavigator {
 
     @Override
     protected Fragment createFragment(String screenKey, Object data) {
+        Bundle arguments = (Bundle) data;
         switch (screenKey) {
             case Screens.PREMIERS:
-                return new PremiersFragment();
+                return getFragment(new PremiersFragment(), arguments);
+            case Screens.FILM_DETAIL:
+                return getFragment(new FilmDetailFragment(), arguments);
         }
         return null;
+    }
+
+    private Fragment getFragment(Fragment fragment, Bundle bundle) {
+        fragment.setArguments(bundle);
+        return fragment;
     }
 }

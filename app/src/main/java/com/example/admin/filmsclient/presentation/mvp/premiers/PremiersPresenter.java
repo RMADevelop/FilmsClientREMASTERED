@@ -1,11 +1,13 @@
 package com.example.admin.filmsclient.presentation.mvp.premiers;
 
-import android.util.Log;
-
 import com.arellomobile.mvp.InjectViewState;
-import com.example.admin.filmsclient.domain.core.pojo.Movie;
 import com.example.admin.filmsclient.domain.premiers.PremiersInteractor;
 import com.example.admin.filmsclient.presentation.mvp.core.BasePresenter;
+import com.example.admin.filmsclient.presentation.mvp.core.mappers.MovieStateMapper;
+import com.example.admin.filmsclient.presentation.mvp.premiers.model.MovieModel;
+import com.example.admin.filmsclient.presentation.mvp.premiers.model.ResultModel;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -15,12 +17,14 @@ import io.reactivex.observers.DisposableSingleObserver;
 public class PremiersPresenter extends BasePresenter<PremiersView> {
 
     private final PremiersInteractor premiersInteractor;
+    private final MovieStateMapper movieStateMapper;
+    private List<ResultModel> list;
 
     @Inject
-    public PremiersPresenter(PremiersInteractor premiersInteractor) {
+    public PremiersPresenter(PremiersInteractor premiersInteractor, MovieStateMapper movieStateMapper) {
         this.premiersInteractor = premiersInteractor;
+        this.movieStateMapper = movieStateMapper;
     }
-
 
     @Override
     protected void onFirstViewAttach() {
@@ -30,11 +34,13 @@ public class PremiersPresenter extends BasePresenter<PremiersView> {
 
     public void getMovie() {
         premiersInteractor.getMovie()
-                .subscribeWith(new DisposableSingleObserver<Movie>() {
+                .map(movieStateMapper::map)
+                .doOnSuccess(movieModel -> list = movieModel.getResults())
+                .subscribeWith(new DisposableSingleObserver<MovieModel>() {
                     @Override
-                    public void onSuccess(Movie movie) {
-                        Log.d("dfsfsdf", "onSuccess: " + movie.getResults().size());
-                        getViewState().setItems(movie.getResults());
+                    public void onSuccess(MovieModel movieModel) {
+                        getViewState().setItems(movieModel.getResults());
+                        getViewState().setStateItems(movieModel.isHasNext());
                     }
 
                     @Override
@@ -42,5 +48,9 @@ public class PremiersPresenter extends BasePresenter<PremiersView> {
                         e.printStackTrace();
                     }
                 });
+    }
+
+    public void onItemClick(ResultModel resultModel) {
+        getViewState().openFilmDetail(resultModel.getId());
     }
 }

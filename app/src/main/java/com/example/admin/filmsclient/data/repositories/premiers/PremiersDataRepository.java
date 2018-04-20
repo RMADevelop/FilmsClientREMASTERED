@@ -22,8 +22,8 @@ public class PremiersDataRepository implements PremiersRepository {
 
 
     @Override
-    public Single<Movie> getMovie() {
-        return server.getMovie()
+    public Single<Movie> getMovie(int page) {
+        return server.getMovie(String.valueOf(page))
                 .map(movieDtoMapper::map);
     }
 }

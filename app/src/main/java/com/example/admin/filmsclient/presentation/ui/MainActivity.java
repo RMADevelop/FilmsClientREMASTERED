@@ -10,6 +10,7 @@ import com.example.admin.filmsclient.di.ComponentManager;
 import com.example.admin.filmsclient.presentation.mvp.MainPresenter;
 import com.example.admin.filmsclient.presentation.mvp.MainView;
 import com.example.admin.filmsclient.presentation.ui.core.BaseActivity;
+import com.example.admin.filmsclient.presentation.ui.premiers.PremiersFragment;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -18,7 +19,7 @@ import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
 
 
-public class MainActivity extends BaseActivity implements MainView {
+public class MainActivity extends BaseActivity implements MainView, PremiersFragment.PremiersFragmentListener {
 
     private final AppNavigator navigator = new AppNavigator(this,
             getSupportFragmentManager(),
@@ -65,5 +66,10 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     protected Navigator getNavigator() {
         return navigator;
+    }
+
+    @Override
+    public void openFragment(int id) {
+        presenter.openFilmDetail(id);
     }
 }
