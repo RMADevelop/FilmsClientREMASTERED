@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.admin.filmsclient.AppNavigator;
+import com.example.admin.filmsclient.Const;
 import com.example.admin.filmsclient.R;
 import com.example.admin.filmsclient.di.ComponentManager;
 import com.example.admin.filmsclient.presentation.mvp.MainPresenter;
@@ -70,6 +71,8 @@ public class MainActivity extends BaseActivity implements MainView, PremiersFrag
 
     @Override
     public void openFragment(int id) {
-        presenter.openFilmDetail(id);
+        Bundle bundle = new Bundle();
+        bundle.putInt(Const.EXTRA_FILM_ID, id);
+        presenter.openFilmDetail(bundle);
     }
 }

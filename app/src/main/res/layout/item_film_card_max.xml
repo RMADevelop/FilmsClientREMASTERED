@@ -52,6 +52,7 @@
             android:id="@+id/imageView2"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:visibility="gone"
             android:layout_marginBottom="0dp"
             android:layout_marginTop="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/text_view_rating"
@@ -70,11 +71,15 @@
         <TextView
             android:id="@+id/text_view_description"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="top"
+            android:ellipsize="end"
+            android:maxLines="5"
             app:layout_constraintBottom_toBottomOf="@+id/image_view_poster"
             app:layout_constraintLeft_toRightOf="@+id/image_view_poster"
-            app:layout_constraintRight_toLeftOf="@+id/imageView2" />
+            app:layout_constraintRight_toLeftOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@id/text_view_date" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

@@ -7,7 +7,6 @@ import com.example.admin.filmsclient.domain.core.pojo.Movie;
 
 import javax.inject.Inject;
 
-
 public class MovieDtoMapper extends BaseMappers<MovieDto, Movie> implements Mapper<MovieDto, Movie> {
 
     private final ResultDtoMapper resultDtoMapper;

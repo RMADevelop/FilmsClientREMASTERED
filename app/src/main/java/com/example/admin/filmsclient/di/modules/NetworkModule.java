@@ -1,9 +1,11 @@
 package com.example.admin.filmsclient.di.modules;
 
+import com.example.admin.filmsclient.data.remote.AuthServer;
 import com.example.admin.filmsclient.data.remote.Server;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -26,6 +28,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
+    @Named("common")
     public OkHttpClient provideOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         HttpLoggingInterceptor interceptor = getLoggingInterceptor();
@@ -39,7 +42,8 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public Retrofit provideRetrofit(OkHttpClient okHttpClient) {
+    @Named("common")
+    public Retrofit provideRetrofit(@Named("common") OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/3/")
                 .client(okHttpClient)
@@ -50,7 +54,15 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public Server provideServer(Retrofit retrofit) {
+    @Named("common")
+    public Server provideServer(@Named("common") Retrofit retrofit) {
         return retrofit.create(Server.class);
+    }
+
+    @Provides
+    @Singleton
+    @Named("common")
+    public AuthServer provideAuthServer(@Named("common") Retrofit retrofit) {
+        return retrofit.create(AuthServer.class);
     }
 }

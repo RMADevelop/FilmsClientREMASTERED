@@ -107,9 +107,10 @@ public class FilmAdapter extends BaseAdapterWithHeaderFooter<ResultModel, FilmAd
         @BindView(R.id.image_view_poster)
         ImageView imageViewPoster;
 
-        public PremiersViewHolder(View itemView, Fragment fragment) {
+        public PremiersViewHolder(View itemView, Fragment fragment, PremiersAdapterListener listener) {
             super(itemView);
             this.fragment = fragment;
+            this.listener = listener;
         }
 
         @Override
@@ -122,7 +123,7 @@ public class FilmAdapter extends BaseAdapterWithHeaderFooter<ResultModel, FilmAd
             GlideApp.with(fragment)
                     .asBitmap()
                     .load(ApiUtils.getPathPoster(getItem().getPosterPath()))
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.drawable.ic_error_outline_black_24dp)
                     .into(imageViewPoster);
         }

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -45,7 +46,7 @@ public class PremiersFragment extends BaseFragment implements PremiersView, Film
 
     @Override
     protected void setupToolbar(Toolbar toolbar) {
-        toolbar.setTitle("TestTitt;le");
+        toolbar.setTitle("TestTitle");
         toolbar.setNavigationIcon(R.drawable.ic_back);
     }
 
@@ -74,6 +75,7 @@ public class PremiersFragment extends BaseFragment implements PremiersView, Film
 
     @Override
     public void setItems(List<ResultModel> resultModel) {
+        Log.d("dsfsdf", "setItems: ");
         filmAdapter.addItems(resultModel);
     }
 
@@ -84,12 +86,12 @@ public class PremiersFragment extends BaseFragment implements PremiersView, Film
 
     @Override
     public void openFilmDetail(int id) {
-        listener.openFragment(id);
+        premiersPresenter.openFragment(id);
     }
 
     @Override
     public void onItemClick(ResultModel resultModel) {
-        premiersPresenter.onItemClick(resultModel);
+        premiersPresenter.openFragment(resultModel.getId());
     }
 
     @Override

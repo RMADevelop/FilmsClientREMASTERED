@@ -25,7 +25,6 @@ public class PremiersInteractor {
     public Single<Movie> getMovie() {
         return premiersRepository.getMovie(paginationState.getPage())
                 .doOnSuccess(movie -> paginationState.nextPage())
-                .doOnSuccess(movie -> Log.d("Sdfsdfsdf", "accept: " + movie.getPage() + paginationState.getPage()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

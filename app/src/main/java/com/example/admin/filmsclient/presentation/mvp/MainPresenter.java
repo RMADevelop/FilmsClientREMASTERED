@@ -1,5 +1,7 @@
 package com.example.admin.filmsclient.presentation.mvp;
 
+import android.os.Bundle;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.example.admin.filmsclient.presentation.Screens;
 import com.example.admin.filmsclient.presentation.mvp.core.BasePresenter;
@@ -24,7 +26,7 @@ public class MainPresenter extends BasePresenter<MainView> {
         router.navigateTo(Screens.PREMIERS);
     }
 
-    public void openFilmDetail(int id) {
-        router.navigateTo(Screens.FILM_DETAIL, id);
+    public void openFilmDetail(Bundle bundle) {
+        router.navigateTo(Screens.FILM_DETAIL, bundle);
     }
 }
