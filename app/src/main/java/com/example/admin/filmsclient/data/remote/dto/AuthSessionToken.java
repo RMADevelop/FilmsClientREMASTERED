@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Builder
-public class AuthCommonToken {
+public class AuthSessionToken {
 
     @Getter
     @SerializedName("success")

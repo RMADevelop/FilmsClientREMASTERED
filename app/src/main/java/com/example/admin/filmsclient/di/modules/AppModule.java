@@ -1,6 +1,8 @@
 package com.example.admin.filmsclient.di.modules;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import javax.inject.Singleton;
 
@@ -20,5 +22,11 @@ public class AppModule {
     @Singleton
     Application provideApplication() {
         return applicationContext;
+    }
+
+    @Provides
+    @Singleton
+    SharedPreferences provideSharedPreferences(Application application) {
+        return PreferenceManager.getDefaultSharedPreferences(application);
     }
 }

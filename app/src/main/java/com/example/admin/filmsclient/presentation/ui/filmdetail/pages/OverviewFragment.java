@@ -1,4 +1,4 @@
-package com.example.admin.filmsclient.presentation.ui.filmdetail.pages.overview;
+package com.example.admin.filmsclient.presentation.ui.filmdetail.pages;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

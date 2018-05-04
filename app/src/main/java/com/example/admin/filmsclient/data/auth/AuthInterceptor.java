@@ -1,6 +1,10 @@
 package com.example.admin.filmsclient.data.auth;
 
+import android.util.Log;
+
 import java.io.IOException;
+
+import javax.inject.Inject;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -20,7 +24,8 @@ public class AuthInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
         if (chain.request().header(ACCESS_TOKEN_HEADER) == null) {
-            builder.addHeader(ACCESS_TOKEN_HEADER, authHolder.getAuthToken());
+            Log.d("dsfsdfsd", "intercept: " + authHolder.getSessionToken() );
+            builder.addHeader(ACCESS_TOKEN_HEADER, authHolder.getSessionToken());
         }
 
         return chain.proceed(builder.build());

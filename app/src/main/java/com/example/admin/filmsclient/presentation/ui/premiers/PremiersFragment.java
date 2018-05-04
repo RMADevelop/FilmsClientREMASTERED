@@ -39,6 +39,15 @@ public class PremiersFragment extends BaseFragment implements PremiersView, Film
                 .providePresenter();
     }
 
+    public static PremiersFragment newInstance() {
+        
+        Bundle args = new Bundle();
+        
+        PremiersFragment fragment = new PremiersFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
     @Override
     protected int getLayoutResId() {
         return R.layout.fragment_blank;

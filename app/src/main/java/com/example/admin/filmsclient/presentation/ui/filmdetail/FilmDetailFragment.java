@@ -3,8 +3,10 @@ package com.example.admin.filmsclient.presentation.ui.filmdetail;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -27,6 +29,9 @@ public class FilmDetailFragment extends BaseFragment implements FilmDetailView {
 
     @BindView(R.id.image_view_poster)
     ImageView imageViewPosterBack;
+
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
 
     @BindView(R.id.view_pager)
     ViewPager viewPager;
@@ -51,7 +56,7 @@ public class FilmDetailFragment extends BaseFragment implements FilmDetailView {
     FilmDetailPresenter providePresenter() {
         return ComponentManager.getComponentManager()
                 .plusFilmDetailComponent()
-                .providePresenter();
+                .provideFilmDetailPresenter();
     }
 
     @Override
@@ -65,22 +70,27 @@ public class FilmDetailFragment extends BaseFragment implements FilmDetailView {
 
         if (getArguments() != null) {
             idFilm = getArguments().getInt(Const.EXTRA_FILM_ID);
+
+            Log.d("sdfsdf", "onCreate: " + idFilm);
         }
     }
 
     @Override
     protected void setupToolbar(Toolbar toolbar) {
         setToolbarNavigationIcon(R.drawable.ic_back);
-        toolbar.setNavigationIcon(R.drawable.ic_back);
         toolbar.setNavigationOnClickListener(v -> presenter.navigationIconClick());
-
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        initUi(view);
         presenter.showContent(idFilm);
+    }
+
+    private void initUi(View view) {
+
     }
 
 
@@ -94,6 +104,7 @@ public class FilmDetailFragment extends BaseFragment implements FilmDetailView {
 
         pagesAdapter = new PagesAdapter(getChildFragmentManager(), filmDetailModel);
         viewPager.setAdapter(pagesAdapter);
+        tabLayout.setupWithViewPager(viewPager);
 
     }
 }

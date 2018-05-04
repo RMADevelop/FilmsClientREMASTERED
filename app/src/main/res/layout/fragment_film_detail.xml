@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -41,8 +39,7 @@
                 android:layout_height="46dp"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="10dp"
-                android:scrollIndicators="start"
-
+                app:tabGravity="fill"
                 app:tabIndicatorColor="@color/white"
                 app:tabIndicatorHeight="3dp"
                 app:tabSelectedTextColor="@color/white"

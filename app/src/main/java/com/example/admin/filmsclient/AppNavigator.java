@@ -33,7 +33,7 @@ public class AppNavigator extends SupportAppNavigator {
     protected Fragment createFragment(String screenKey, Object data) {
         switch (screenKey) {
             case Screens.PREMIERS:
-                return getFragment(new PremiersFragment());
+                return PremiersFragment.newInstance();
             case Screens.FILM_DETAIL:
                 return FilmDetailFragment.newInstance((FilmDetailPresenter.Params) data);
         }

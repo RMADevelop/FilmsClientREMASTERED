@@ -6,6 +6,7 @@ import com.example.admin.filmsclient.domain.core.pojo.Movie;
 import com.example.admin.filmsclient.domain.premiers.PremiersRepository;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import io.reactivex.Single;
 

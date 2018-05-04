@@ -1,6 +1,7 @@
 package com.example.admin.filmsclient.data.repositories.filmDetail;
 
 import com.example.admin.filmsclient.data.remote.Server;
+import com.example.admin.filmsclient.data.remote.dto.ReviewsDto;
 import com.example.admin.filmsclient.data.remote.mappers.FilmDetailDtoMapper;
 import com.example.admin.filmsclient.domain.core.pojo.FilmDetail;
 import com.example.admin.filmsclient.domain.filmDetail.FilmDetailRepository;
@@ -24,5 +25,10 @@ public class FilmDetailDataRepository implements FilmDetailRepository {
     public Single<FilmDetail> getFilmInfo(int id) {
         return server.getFilmInfo(id)
                 .map(filmDetailDtoMapper::map);
+    }
+
+    @Override
+    public Single<ReviewsDto> getReviews(int id) {
+        return server.getReviews(id);
     }
 }
